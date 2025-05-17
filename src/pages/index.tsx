@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router";
-import HomePage from "./HomePage";
-import MainTemplate from "../shared/templates/MainTemplate";
-import SignUpPage from "./auth/SignUpPage";
-import SignInPage from "./auth/SignInPage";
+import { MainTemplate } from "../shared/templates";
+import { HomePage } from "./HomePage";
+import { SignInPage } from "./auth/SignInPage";
+import { SignUpPage } from "./auth/SignUpPage";
 
 export const Routing = () => {
   return (

@@ -1,13 +1,13 @@
 import { NavLink } from "react-router";
-import HeaderButton from "./HeaderButton";
-import { useAuth } from "../../../../app/providers/authProviders";
-import LogoutButton from "../../../../features/auth/components/LogoutButton";
+import HeaderButton from "./ui/HeaderButton";
+import { useAuth } from "../../../app/providers/authProviders";
+import LogoutButton from "../../../features/auth/components/LogoutButton";
 
 interface NavItem {
   name: string;
   path: string;
-  requiresAuth?: boolean; // True if only for logged-in users
-  hideWhenAuth?: boolean; // True if only for logged-out users
+  requiresAuth?: boolean;
+  hideWhenAuth?: boolean;
 }
 
 const allNavItems: NavItem[] = [
