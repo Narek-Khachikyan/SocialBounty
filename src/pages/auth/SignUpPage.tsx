@@ -1,10 +1,17 @@
 // src/components/SignUp.tsx
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  type User,
+} from "firebase/auth";
 import { auth } from "../../shared/firebase";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export const SignUpPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -16,8 +23,15 @@ export const SignUpPage: React.FC = () => {
     setLoading(true);
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert("Account created successfully!");
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user: User = userCredential.user;
+      await updateProfile(user, { displayName });
+      alert(`Account created! Welcome, ${user.displayName}`);
+      navigate("/");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -37,12 +51,20 @@ export const SignUpPage: React.FC = () => {
         </h2>
         <form onSubmit={handleSignUp} className="flex flex-col gap-4">
           <input
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            placeholder="Name"
+            required
+            className="py-3 px-4 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
+          />
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             required
-            className="py-3 px-4 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="py-3 px-4 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
           />
           <input
             type="password"
@@ -50,7 +72,7 @@ export const SignUpPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
-            className="py-3 px-4 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="py-3 px-4 border border-gray-300 rounded text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-black"
           />
           <button
             type="submit"

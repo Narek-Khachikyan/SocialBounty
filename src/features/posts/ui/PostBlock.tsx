@@ -1,13 +1,13 @@
 import { NavLink } from "react-router";
 import type { Post } from "../server/postsApi";
 
-export const PostBlock = ({ title, body, author }: Post) => {
+export const PostBlock = ({ title, body, displayName }: Post) => {
   return (
     <NavLink to={"/"}>
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mb-4">
         <div className="flex items-center ">
           <div>
-            <div className="font-semibold text-gray-800">{author}</div>
+            <div className="font-semibold text-gray-800">{displayName}</div>
             <div className="text-xs text-gray-500">2 hours ago</div>
           </div>
         </div>

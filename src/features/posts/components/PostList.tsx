@@ -18,7 +18,7 @@ export function PostsList() {
   return (
     <ul>
       {posts.map((post: Post) => (
-        <PostBlock {...post} />
+        <PostBlock key={post.id} {...post} />
       ))}
     </ul>
   );

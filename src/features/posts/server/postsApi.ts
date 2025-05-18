@@ -6,7 +6,7 @@ import type { DatabaseReference } from "firebase/database";
 export interface Post {
   id: string;
   title: string;
-  author: string;
+  displayName: string;
   body: string;
 }
 
