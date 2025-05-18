@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import type { Post } from "../postsApi";
+import type { Post } from "../server/postsApi";
 
 export const PostBlock = ({ title, body, author }: Post) => {
   return (

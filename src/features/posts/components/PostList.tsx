@@ -1,5 +1,5 @@
-import { useGetPostsQuery } from "../postsApi";
-import type { Post } from "../postsApi";
+import { useGetPostsQuery } from "../server/postsApi";
+import type { Post } from "../server/postsApi";
 import { PostBlock } from "../ui/PostBlock";
 
 export function PostsList() {
